@@ -48,16 +48,26 @@ public class MainActivity extends AppCompatActivity {
         List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
         String spokenText = results.get(0);
         if(spokenText.contains("up"))
-            Toast.makeText(this, "Moving up", Toast.LENGTH_SHORT).show();
+         {Toast.makeText(this, "Moving up", Toast.LENGTH_SHORT).show();
+          float y = box.getY(); y-=10; box.setY(y); }
         else if(spokenText.contains("down"))
-            Toast.makeText(this, "Moving down", Toast.LENGTH_SHORT).show();
+         {Toast.makeText(this, "Moving down", Toast.LENGTH_SHORT).show();
+          float y = box.getY(); y+=10; box.setY(y); }
         else if(spokenText.contains("left"))
-            Toast.makeText(this, "Moving left", Toast.LENGTH_SHORT).show();
+         {Toast.makeText(this, "Moving left", Toast.LENGTH_SHORT).show();
+          float x = box.getX(); x-=10; box.setX(x); }
         else if(spokenText.contains("right"))
-            Toast.makeText(this, "Moving right", Toast.LENGTH_SHORT).show();
+         {Toast.makeText(this, "Moving right", Toast.LENGTH_SHORT).show();
+          float x = box.getX(); x+=10; box.setX(x); }
         else
-            Toast.makeText(this, "Invalid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sorry, command not recognized.", Toast.LENGTH_SHORT).show();
         }
+        else if(resultCode == RecognizerIntent.RESULT_AUDIO_ERROR)
+            Toast.makeText(this, "Audio error! Try Again.", Toast.LENGTH_LONG).show();
+        else if(resultCode == RecognizerIntent.RESULT_NO_MATCH)
+            Toast.makeText(this, "No match found! Try Again.", Toast.LENGTH_LONG).show();
+        else if(resultCode == RecognizerIntent.RESULT_NETWORK_ERROR)
+            Toast.makeText(this, "Network error! Try later when network  is available.", Toast.LENGTH_LONG).show();
         super.onActivityResult(requestCode, resultCode, data);
     }
 

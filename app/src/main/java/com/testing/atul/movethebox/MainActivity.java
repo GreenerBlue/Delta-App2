@@ -1,12 +1,16 @@
 package com.testing.atul.movethebox;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ImageView;
 
@@ -16,12 +20,18 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int SPEECH_REQUEST_CODE = 0;
     ImageView box;
+    RelativeLayout l;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         box = (ImageView)findViewById(R.id.box1);
+        l = (RelativeLayout)findViewById(R.id.layout);
+        mContext = this;
+        int left = l.getLeft();
+
     }
 
     @Override
@@ -69,6 +79,30 @@ public class MainActivity extends AppCompatActivity {
         else if(resultCode == RecognizerIntent.RESULT_NETWORK_ERROR)
             Toast.makeText(this, "Network error! Try later when network  is available.", Toast.LENGTH_LONG).show();
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        menu.add(1, 1, 1, "Instructions");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        { case 1:
+         {
+        Intent i = new Intent(mContext, Instructions.class);
+        startActivity(i);
+        break;}
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }

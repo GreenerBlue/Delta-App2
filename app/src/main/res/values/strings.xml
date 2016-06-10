@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MoveTheBox</string>
-    <string name="button1">SPEAK</string>
+    <string name="button1">TAP TO SPEAK</string>
     <string name="info">
-        Commands available are :\nMove Up \nMove Down \nMove Left \nMove Right \n
+        Please wait until the voice recognizer is ready. Each command moves the box by 10 pixels.\n
+        The commands that are recognized are :\n1. Move Up \n2. Move Down \n3. Move Left \n4. Move Right \n5. Change to circle\n6. Change to square\n
     </string>
 </resources>

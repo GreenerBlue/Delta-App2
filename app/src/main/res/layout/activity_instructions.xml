@@ -15,8 +15,8 @@ tools:context="com.testing.atul.movethebox.Instructions">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/info"
-        android:textSize="40sp"
-        android:textColor="#44BB88"
+        android:textSize="30sp"
+        android:textColor="#186745"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
 

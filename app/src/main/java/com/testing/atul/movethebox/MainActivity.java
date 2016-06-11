@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView box;
     RelativeLayout l;
     Context mContext;
+    Drawable sq,cr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,30 +55,40 @@ public class MainActivity extends AppCompatActivity {
     {
         if(requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
 
-        List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-        String spokenText = results.get(0);
-        if(spokenText.contains("up"))
-         {  Toast.makeText(this, "Moving up", Toast.LENGTH_SHORT).show();
-            float y = box.getY();
-            y -= 100; box.setY(y);
-         }
-        else if(spokenText.contains("down"))
-         {  Toast.makeText(this, "Moving down", Toast.LENGTH_SHORT).show();
-            float y = box.getY();
-            y += 100; box.setY(y);
-         }
-        else if(spokenText.contains("left"))
-         {  Toast.makeText(this, "Moving left", Toast.LENGTH_SHORT).show();
-            float x = box.getX();
-            x-=100; box.setX(x);
-         }
-        else if(spokenText.contains("right"))
-         {  Toast.makeText(this, "Moving right", Toast.LENGTH_SHORT).show();
-            float x = box.getX();
-            x += 100; box.setX(x);
-         }
-        else
-            Toast.makeText(this, "Sorry, command not recognized.", Toast.LENGTH_SHORT).show();
+            List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            String spokenText = results.get(0);
+            if(spokenText.contains("up"))
+            {  Toast.makeText(this, "Moving up", Toast.LENGTH_SHORT).show();
+                float y = box.getY();
+                y -= 10; box.setY(y);
+            }
+            else if(spokenText.contains("down"))
+            {  Toast.makeText(this, "Moving down", Toast.LENGTH_SHORT).show();
+                float y = box.getY();
+                y += 10; box.setY(y);
+            }
+            else if(spokenText.contains("left"))
+            {  Toast.makeText(this, "Moving left", Toast.LENGTH_SHORT).show();
+                float x = box.getX();
+                x-=10; box.setX(x);
+            }
+            else if(spokenText.contains("right"))
+            {  Toast.makeText(this, "Moving right", Toast.LENGTH_SHORT).show();
+                float x = box.getX();
+                x += 10; box.setX(x);
+            }
+
+            else if(spokenText.contains("circle"))
+            {  Toast.makeText(this, "Changing to circle", Toast.LENGTH_SHORT).show();
+                box.setImageResource(R.drawable.circle1);
+            }
+            else if(spokenText.contains("square"))
+            {  Toast.makeText(this, "Changing to square", Toast.LENGTH_SHORT).show();
+                box.setImageResource(R.drawable.square2);
+            }
+
+            else
+                Toast.makeText(this, "Sorry, command not recognized.", Toast.LENGTH_SHORT).show();
         }
         else if(resultCode == RecognizerIntent.RESULT_AUDIO_ERROR)
             Toast.makeText(this, "Audio error! Try Again.", Toast.LENGTH_LONG).show();

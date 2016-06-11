@@ -4,10 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
+import android.graphics.Point;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView box;
     RelativeLayout l;
     Context mContext;
-    Drawable sq,cr;
+    Display d; Point size;
+    int maxX, maxY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         box = (ImageView)findViewById(R.id.box1);
         l = (RelativeLayout)findViewById(R.id.layout);
+        d = getWindowManager().getDefaultDisplay();
+        size = new Point();
+        d.getSize(size);
+        maxX = size.x; maxY = size.y;
+
         mContext = this;
     }
 
@@ -58,24 +65,40 @@ public class MainActivity extends AppCompatActivity {
             List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             String spokenText = results.get(0);
             if(spokenText.contains("up"))
-            {  Toast.makeText(this, "Moving up", Toast.LENGTH_SHORT).show();
-                float y = box.getY();
-                y -= 10; box.setY(y);
+            {   float y = (box.getY()-10);
+                if(y>=0) {
+                    Toast.makeText(this, "Moving up", Toast.LENGTH_SHORT).show();
+                    box.setY(y);
+                }
+                else
+                    Toast.makeText(this, "Cannot move up", Toast.LENGTH_SHORT).show();
             }
             else if(spokenText.contains("down"))
-            {  Toast.makeText(this, "Moving down", Toast.LENGTH_SHORT).show();
-                float y = box.getY();
-                y += 10; box.setY(y);
+            {   float y = (box.getY()+10);
+                if(y<=maxY) {
+                    Toast.makeText(this, "Moving down", Toast.LENGTH_SHORT).show();
+                    box.setY(y);
+                }
+                else
+                    Toast.makeText(this, "Cannot move down", Toast.LENGTH_SHORT).show();
             }
             else if(spokenText.contains("left"))
-            {  Toast.makeText(this, "Moving left", Toast.LENGTH_SHORT).show();
-                float x = box.getX();
-                x-=10; box.setX(x);
+            {   float x = (box.getX()-10);
+                if(x>=0) {
+                    Toast.makeText(this, "Moving left", Toast.LENGTH_SHORT).show();
+                    box.setX(x);
+                }
+                else
+                    Toast.makeText(this, "Cannot move left", Toast.LENGTH_SHORT).show();
             }
             else if(spokenText.contains("right"))
-            {  Toast.makeText(this, "Moving right", Toast.LENGTH_SHORT).show();
-                float x = box.getX();
-                x += 10; box.setX(x);
+            {   float x = (box.getX()+10);
+                if(x<=maxX) {
+                    Toast.makeText(this, "Moving right", Toast.LENGTH_SHORT).show();
+                    box.setX(x);
+                }
+                else
+                    Toast.makeText(this, "Cannot move right", Toast.LENGTH_SHORT).show();
             }
 
             else if(spokenText.contains("circle"))

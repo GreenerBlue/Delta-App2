@@ -2,7 +2,7 @@
     <string name="app_name">MoveTheBox</string>
     <string name="button1">TAP TO SPEAK</string>
     <string name="info">
-        Please wait until the voice recognizer is ready. Each command moves the box by 10 pixels.\n
-        The commands that are recognized are :\n1. Move Up \n2. Move Down \n3. Move Left \n4. Move Right \n5. Change to circle\n6. Change to square\n
+        Please wait until the voice recognizer is ready. Each command moves the box by 10 pixels. The gray square shows the starting position and shape.\n\n
+        The commands that are recognized are :\n1. Move Up \n2. Move Down \n3. Move Left \n4. Move Right \n5. Change into a circle\n6. Change into a square\n
     </string>
 </resources>
